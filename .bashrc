@@ -109,3 +109,4 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 source ~/.bashrc.rovina
 
+export PATH=$PATH:~/Export/android-studio/sdk/platform-tools/  
