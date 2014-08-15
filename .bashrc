@@ -53,10 +53,13 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-blackbld='\e[1;30m'
+txtbld=$(tput bold) 
+txtrst=$(tput sgr0) 
+WHITE=$(tput setaf 7)
+BLUE=${txtbld}$(tput setaf 4)
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\e[1;38;5;32m\]\u@\h\[\e[1;30m\]:\[\e[1;30m\]\w\[\033[00m\]\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\[${BLUE}\]\u@\h\[${WHITE}\]:\[${WHITE}\]\w\[${WHITE}\]\$${txtrst} '
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
@@ -101,12 +104,16 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
-source ~/.bashrc.rovina
 
-export PATH=$PATH:~/Export/android-studio/sdk/platform-tools/  
+[[ -n "$DISPLAY" && "$TERM" = "xterm" ]] && export TERM=xterm-256color
+
+# setup android usage
+export PATH=$PATH:~/Export/android-studio/sdk/platform-tools/
+
